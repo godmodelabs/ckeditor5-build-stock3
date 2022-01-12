@@ -1,0 +1,42 @@
+.stock3.stock3-form {
+	display: flex;
+	padding: var(--ck-spacing-large);
+}
+.stock3.stock3-form > *:not(:first-child) {
+	margin-left: var(--ck-spacing-standard);
+}
+
+.stock3.stock3-input {
+	flex: 1;
+	background: var(--ck-color-input-background);
+	border: 1px solid var(--ck-color-input-border);
+	border-radius: var(--ck-border-radius);
+	padding: var(--ck-spacing-extra-tiny) var(--ck-spacing-medium);
+	min-width: var(--ck-input-text-width);
+	min-height: var(--ck-ui-component-min-height);
+	transition: box-shadow .1s ease-in-out,border .1s ease-in-out;
+}
+.stock3.stock3-input:focus {
+	outline: none;
+	border: var(--ck-focus-ring);
+	box-shadow: var(--ck-focus-outer-shadow),0 0;
+}
+
+.stock3.stock3-accept {
+	color: var(--ck-color-button-save);
+}
+
+.stock3.stock3-cancel {
+	color: var(--ck-color-button-cancel);
+}
+
+.stock3.stock3-notice {
+	padding: 0 var(--ck-spacing-large) var(--ck-spacing-large);
+}
+.stock3.stock3-notice li {
+	list-style: none;
+}
+.stock3.stock3-notice a {
+	text-decoration: underline;
+	cursor: pointer;
+}

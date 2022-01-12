@@ -28,13 +28,39 @@
 
 <script src="../build/ckeditor.js"></script>
 <script>
-	Stock3Editor.create( document.querySelector( '#editor' ) )
-		.then( editor => {
-			window.editor = editor;
-		} )
-		.catch( error => {
-			console.error( 'There was a problem initializing the editor.', error );
-		} );
+	class ChartingAdapter {
+		constructor(editor) {
+			this.editor = editor;
+		}
+
+		init() {
+			const chartingPlugin = this.editor.plugins.get('Charting');
+			chartingPlugin.adapter = this;
+		}
+
+		getCharts() {
+			return new Promise((resolve) => {
+				const dummy = {
+					id: 4752216,
+					thumbSrc: 'https://api.boerse-go.de/charting/4752216.image?application=default&template=thumb&client_id=gmt',
+					imageSrc: 'https://api.boerse-go.de/charting/4752216.image?application=default&template=chart&client_id=gmt',
+					chartName: 'Fibonacci Test',
+					instrumentName: 'DAX'
+				};
+				setTimeout(() => {
+					resolve([
+						dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy,
+						dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy
+					])
+				}, 1000);
+			});
+		}
+	}
+
+	Stock3Editor.create(
+		document.querySelector( '#editor' ),
+		{ extraPlugins: [ ChartingAdapter ] }
+	).catch( error => console.error( 'There was a problem initializing the editor.', error ));
 </script>
 
 </body>

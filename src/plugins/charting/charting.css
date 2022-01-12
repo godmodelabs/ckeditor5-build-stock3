@@ -1,0 +1,40 @@
+.stock3.stock3-charting-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	max-width: 526px;
+	max-height: 525px;
+	overflow-y: auto;
+	padding: 6px 0 6px 15px;
+}
+
+.stock3.stock3-charting-item {
+	max-width: 120px;
+	flex-direction: column;
+	display: flex;
+	cursor: pointer;
+	padding: 3px;
+	border-radius: 2px;
+	transition: box-shadow 0.2s;
+}
+
+.stock3.stock3-charting-item:hover {
+	box-shadow: inset 0 0 0 1px var(--ck-color-base-background),0 0 0 2px var(--ck-color-focus-border);
+}
+
+.stock3.stock3-charting-info {
+	display: flex;
+	flex-direction: column;
+}
+.stock3.stock3-charting-info span {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.stock3.stock3-charting-chartName {
+	margin-top: 4px;
+	line-height: 20px;
+}
+.stock3.stock3-charting-instrumentName {
+	font-size: smaller;
+	line-height: 16px;
+}
