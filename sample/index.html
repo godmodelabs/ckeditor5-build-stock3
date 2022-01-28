@@ -8,6 +8,10 @@
 			max-width: 800px;
 			margin: 20px auto;
 		}
+
+		span[data-user-id] {
+			background-color: #00b0f0;
+		}
 	</style>
 </head>
 <body>
@@ -59,7 +63,23 @@
 
 	Stock3Editor.create(
 		document.querySelector( '#editor' ),
-		{ extraPlugins: [ ChartingAdapter ] }
+		{
+			extraPlugins: [ ChartingAdapter ],
+			mention: {
+				feeds: [
+					{
+						marker: '@',
+						feed: [
+							{ id: '@Barney Stinson', userId: '1' },
+							{ id: '@Lily Aldrin', userId: '2' },
+							{ id: '@Marshall Eriksen', userId: '3' },
+							{ id: '@Robin Scherbatsky', userId: '4' },
+							{ id: '@Ted Mosby', userId: '5' }
+						],
+					},
+				],
+			},
+		}
 	).catch( error => console.error( 'There was a problem initializing the editor.', error ));
 </script>
 

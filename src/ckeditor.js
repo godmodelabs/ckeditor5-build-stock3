@@ -16,6 +16,8 @@ import Emojis from './plugins/emojis/Emojis';
 import Charting from './plugins/charting/Charting';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
+import Mention from '@ckeditor/ckeditor5-mention/src/mention';
+import MentionCustomization from './plugins/mentionCustomization/MentionCustomization';
 
 export default class Stock3Editor extends ClassicEditorBase {}
 
@@ -30,7 +32,9 @@ Stock3Editor.builtinPlugins = [
 	InsertImage,
 	Emojis,
 	Charting,
-	Paragraph
+	Paragraph,
+	Mention,
+	MentionCustomization
 ];
 
 // Editor configuration.
