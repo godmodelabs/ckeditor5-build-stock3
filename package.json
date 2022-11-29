@@ -1,6 +1,6 @@
 {
   "name": "ckeditor5-build-stock3",
-  "version": "34.0.0-stable",
+  "version": "34.0.0-stable-html-enabled.3",
   "description": "The classic editor build of CKEditor 5 – the best browser-based rich text editor.",
   "keywords": [
     "ckeditor5-build",
@@ -32,6 +32,7 @@
     "@ckeditor/ckeditor5-essentials": "^34.0.0",
     "@ckeditor/ckeditor5-font": "^34.0.0",
     "@ckeditor/ckeditor5-image": "^34.0.0",
+    "@ckeditor/ckeditor5-html-embed": "^34.0.0",
     "@ckeditor/ckeditor5-link": "^34.0.0",
     "@ckeditor/ckeditor5-paragraph": "^34.0.0",
     "@ckeditor/ckeditor5-ui": "^34.0.0",

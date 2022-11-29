@@ -6,17 +6,21 @@
 // The editor creator to use.
 import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 
+// CKEditor Plugins 
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
 import Image from '@ckeditor/ckeditor5-image/src/image';
 import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
-import InsertImage from './plugins/insertImage/InsertImage';
-import Emojis from './plugins/emojis/Emojis';
-import Charting from './plugins/charting/Charting';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import Mention from '@ckeditor/ckeditor5-mention/src/mention';
+import HtmlEmbed from '@ckeditor/ckeditor5-html-embed/src/htmlembed';
+
+// Stock3 Custom Plugins
+import InsertImage from './plugins/insertImage/InsertImage';
+import Emojis from './plugins/emojis/Emojis';
+import Charting from './plugins/charting/Charting';
 import MentionCustomization from './plugins/mentionCustomization/MentionCustomization';
 
 export default class Stock3Editor extends ClassicEditorBase {}
@@ -29,12 +33,15 @@ Stock3Editor.builtinPlugins = [
 	Link,
 	Image,
 	ImageStyle,
+	Paragraph,
+	Mention,
+    HtmlEmbed,
+    
+    // Custom
 	InsertImage,
 	Emojis,
 	Charting,
-	Paragraph,
-	Mention,
-	MentionCustomization
+	MentionCustomization,
 ];
 
 // Editor configuration.
@@ -45,7 +52,8 @@ Stock3Editor.defaultConfig = {
 		'link',
 		'insertImage',
 		'emojis',
-		'charting'
+		'charting',
+        'htmlEmbed',
 	],
 
 	// This value must be kept in sync with the language defined in webpack.config.js.
