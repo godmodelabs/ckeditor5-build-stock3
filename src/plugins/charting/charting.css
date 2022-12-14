@@ -17,6 +17,10 @@
 	transition: box-shadow 0.2s;
 }
 
+.stock3.stock3-charting-item img{
+	max-width: 114px;
+}
+
 .stock3.stock3-charting-item:hover {
 	box-shadow: inset 0 0 0 1px var(--ck-color-base-background),0 0 0 2px var(--ck-color-focus-border);
 }

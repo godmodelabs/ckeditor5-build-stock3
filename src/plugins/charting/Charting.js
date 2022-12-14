@@ -32,7 +32,7 @@ export default class Charting extends Plugin {
 
 					const buttons = charts.map( chart => {
 						const view = new ChartView( locale, chart );
-						view.on( 'clicked', () => {
+						view.on( 'execute', () => {
 							if ( chart.imageSrc ) {
 								this.editor.model.change( writer => {
 									const imageElement = writer.createElement( 'imageBlock', { src: chart.imageSrc } );

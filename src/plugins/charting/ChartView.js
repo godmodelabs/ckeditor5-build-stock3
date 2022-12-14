@@ -1,11 +1,11 @@
-import View from '@ckeditor/ckeditor5-ui/src/view';
+import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 
-export default class ChartView extends View {
+export default class ChartView extends ButtonView {
 	constructor( locale, chart ) {
 		super( locale );
 
 		this.setTemplate( {
-			tag: 'div',
+			tag: 'button', // first element must be focus-able
 			children: [
 				{
 					tag: 'img',
@@ -37,7 +37,7 @@ export default class ChartView extends View {
 				]
 			},
 			on: {
-				click: this.bindTemplate.to( 'clicked' )
+				click: this.bindTemplate.to( 'execute' )
 			}
 		} );
 	}
