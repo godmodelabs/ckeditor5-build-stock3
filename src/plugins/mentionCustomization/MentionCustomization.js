@@ -12,7 +12,7 @@ export default class MentionCustomization extends Plugin {
 		editor.conversion.for( 'upcast' ).elementToAttribute( {
 			view: {
 				name: 'span',
-				key: 'data-user-id',
+				attributes: 'data-user-id'
 			},
 			model: {
 				key: 'mention',
@@ -36,7 +36,7 @@ export default class MentionCustomization extends Plugin {
 				}
 
 				return writer.createAttributeElement( 'span', {
-					'data-user-id': modelAttributeValue.userId,
+					'data-user-id': modelAttributeValue.userId
 				}, {
 					// Make mention attribute to be wrapped by other attribute elements.
 					priority: 20,

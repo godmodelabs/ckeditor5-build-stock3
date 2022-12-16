@@ -10,6 +10,55 @@ export default class Charting extends Plugin {
 		this.adapter = null;
 	}
 
+	init() {
+		const schema = this.editor.model.schema;
+		const imageBlockRegistered = schema.isRegistered( 'imageBlock' );
+		const imageInlineRegistered = schema.isRegistered( 'imageInline' );
+		if ( imageBlockRegistered ) {
+			schema.extend( 'imageBlock', { allowAttributes: 'chartId' } );
+		}
+		if ( imageInlineRegistered ) {
+			schema.extend( 'imageInline', { allowAttributes: 'chartId' } );
+		}
+
+		this.editor.conversion.for( 'upcast' ).attributeToAttribute( {
+			view: 'data-chartid',
+			model: 'chartId'
+		} );
+
+		/**
+		 * Downcast handler that puts the data-chartid attribute on the img element, not the containing element
+		 * @param evt
+		 * @param data
+		 * @param conversionApi
+		 */
+		const convertChartId = ( evt, data, conversionApi ) => {
+			if ( !conversionApi.consumable.consume( data.item, evt.name ) ) {
+				return;
+			}
+
+			const viewWriter = conversionApi.writer;
+			const figure = conversionApi.mapper.toViewElement( data.item );
+			const img = figure.getChild( 0 ) || figure; // img usually the first child. if no children, we are the img element
+
+			if ( data.attributeNewValue !== null ) {
+				viewWriter.setAttribute( 'data-chartid', data.attributeNewValue, img );
+			} else {
+				viewWriter.removeAttribute( 'data-chartid', img );
+			}
+		};
+
+		this.editor.conversion.for( 'dataDowncast' ).add( dispatcher => {
+			// Note: simple downcast attributeToAttribute helper does not allow that we want the chartId on the img element
+			if ( imageBlockRegistered ) {
+				dispatcher.on( 'attribute:chartId:imageBlock', convertChartId );
+			}
+			if ( imageInlineRegistered ) {
+				dispatcher.on( 'attribute:chartId:imageInline', convertChartId );
+			}
+		} );
+	}
+
 	afterInit() {
 		if ( !this.adapter || !this.adapter.getCharts ) {
 			// eslint-disable-next-line no-undef
@@ -35,7 +84,7 @@ export default class Charting extends Plugin {
 						view.on( 'execute', () => {
 							if ( chart.imageSrc ) {
 								this.editor.model.change( writer => {
-									const imageElement = writer.createElement( 'imageBlock', { src: chart.imageSrc } );
+									const imageElement = writer.createElement( 'imageBlock', { src: chart.imageSrc, chartId: chart.id } );
 									this.editor.model.insertContent( imageElement, this.editor.model.document.selection );
 								} );
 							}

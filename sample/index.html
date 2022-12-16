@@ -8,9 +8,154 @@
 			max-width: 800px;
 			margin: 20px auto;
 		}
+	</style>
 
+	<style>
+		/*
+		SAMPLE STYLES FOR mentionCustomization plugin
+		  You will have to include them into your css
+		*/
 		span[data-user-id] {
 			background-color: #00b0f0;
+		}
+	</style>
+
+	<style>
+		/*
+		SAMPLE STYLES FOR stock3colors plugin
+			You will have to include them into your css when you allow them in the styles list
+		*/
+
+		.ew-minor   {
+			font-weight: bold;
+			color: #3366ff;
+			font-size: 120%;
+		}
+
+		.trading-profit   {
+			padding: 1px 4px;
+			border-radius: 5px;
+			color: #333;
+			text-shadow: none;
+			background-color: #9fef4f;
+		}
+
+		.trading-loss   {
+			padding: 1px 4px;
+			border-radius: 5px;
+			color: #333;
+			text-shadow: none;
+			background-color: #ff5f43;
+		}
+
+		.important   {
+			padding: 1px 4px;
+			border-radius: 5px;
+			color: #333;
+			text-shadow: none;
+			background-color: #ffe72f;
+			font-weight: bold;
+		}
+
+		.special-warning   {
+			padding: 1px 4px;
+			border-radius: 5px;
+			color: #333;
+			text-shadow: none;
+			background-color: #f76f9f;
+		}
+
+		.basic-knowledge   {
+			padding: 1px 4px;
+			border-radius: 5px;
+			color: #333;
+			text-shadow: none;
+			background-color: #51beff;
+		}
+
+		.ew-entry   {
+			color: #0000ff;
+			font-weight: bold;
+		}
+
+		.ew-stop   {
+			color: #ff0000;
+			font-weight: bold;
+		}
+
+		.ew-target   {
+			color: #339966;
+			font-weight: bold;
+		}
+
+		.elliott-wave   {
+			font-weight: bold;
+		}
+
+		.ew-grand-super-cycle   {
+			font-weight: bold;
+			color: #339966;
+			font-size: 160%;
+		}
+
+		.ew-super-cycle   {
+			font-weight: bold;
+			color: #0000ff;
+			font-size: 160%;
+		}
+
+		.ew-cycle   {
+			font-weight: bold;
+			color: #ff0000;
+			font-size: 160%;
+		}
+
+		.ew-primary   {
+			font-weight: bold;
+			color: #111111;
+			font-size: 140%;
+		}
+
+		.ew-intermediate   {
+			font-weight: bold;
+			color: #999999;
+			font-size: 140%;
+		}
+
+		.ew-minor   {
+			font-weight: bold;
+			color: #3366ff;
+			font-size: 120%;
+		}
+
+		.ew-minute   {
+			font-weight: bold;
+			color: #ff00ff;
+			font-size: 120%;
+		}
+
+		.ew-minuette   {
+			font-weight: bold;
+			color: #007f00;
+			font-size: 120%;
+		}
+
+		.ew-sub-minuette   {
+			font-weight: bold;
+			color: #000000;
+			font-size: 120%;
+		}
+
+		.ew-micro   {
+			font-weight: bold;
+			color: #ff7f00;
+			font-size: 120%;
+		}
+
+		.ew-sub-micro   {
+			font-weight: bold;
+			color: #7f3f00;
+			font-size: 120%;
 		}
 	</style>
 </head>
@@ -21,17 +166,29 @@
 <div id="editor">
 	<h2>Sample</h2>
 
-	<p>This is an instance of the stock3 editor build.</p>
+	<p>This is an instance of <span class="asdf">the</span> stock3 <span class="special-warning">editor</span> build.</p>
 
 	<figure class="image">
 		<img src="../tests/manual/sample.jpg" alt="Autumn fields" />
 	</figure>
+
+	<figure class="image">
+		<img data-chartid="4752216" src="https://api.boerse-go.de/charting/4752216.image?application=default&template=chart&client_id=stock3">
+	</figure>
+
+	<p>
+		<span data-user-id="1">@Barney Stinson</span> Dies ist eine Test-mention
+	</p>
 
 	<p>You can use this sample to validate whether your <a href="https://ckeditor.com/docs/ckeditor5/latest/builds/guides/development/custom-builds.html">custom build</a> works fine.</p>
 </div>
 
 <script src="../build/ckeditor.js"></script>
 <script>
+	/* ***********************************************
+	 * Sample Charting Adapter
+	 *     This is required for the charting plugin, You will have to create your own
+	 * *********************************************** */
 	class ChartingAdapter {
 		constructor(editor) {
 			this.editor = editor;
@@ -53,14 +210,100 @@
 				};
 				setTimeout(() => {
 					resolve([
-						dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy,
-						dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy
+						dummy, /*dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy,
+						dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy, dummy*/
 					])
 				}, 1000);
 			});
 		}
 	}
 
+	/* ***********************************************
+	 * Sample Stock3 colors list
+	 *     This is required for the stock3colors plugin, You will have to define your own
+	 * *********************************************** */
+	const availableStyles = [
+		{
+			'title': 'Sonderwarnung',
+			'classes': 'special-warning'
+		},
+		{
+			'title': 'Basiswissen',
+			'classes': 'basic-knowledge'
+		},
+		{
+			'title': 'Grand Super Cycle',
+			'classes': 'ew-grand-super-cycle'
+		},
+		{
+			'title': 'Super Cycle',
+			'classes': 'ew-super-cycle'
+		},
+		{
+			'title': 'Cycle',
+			'classes': 'ew-cycle'
+		},
+		{
+			'title': 'Primary',
+			'classes': 'ew-primary'
+		},
+		{
+			'title': 'Intermediate',
+			'classes': 'ew-intermediate'
+		},
+		{
+			'title': 'Minor',
+			'classes': 'ew-minor'
+		},
+		{
+			'title': 'Minute',
+			'classes': 'ew-minute'
+		},
+		{
+			'title': 'Minutte',
+			'classes': 'ew-minuette'
+		},
+		{
+			'title': 'Sub Minuette',
+			'classes': 'ew-sub-minuette'
+		},
+		{
+			'title': 'Micro',
+			'classes': 'ew-micro'
+		},
+		{
+			'title': 'Sub Micro',
+			'classes': 'ew-sub-micro'
+		},
+		{
+			'title': 'Einstieg',
+			'classes': 'ew-entry'
+		},
+		{
+			'title': 'Stopp',
+			'classes': 'ew-stop'
+		},
+		{
+			'title': 'Ziel',
+			'classes': 'ew-target'
+		},
+		{
+			'title': 'Tradegewinn',
+			'classes': 'trading-profit'
+		},
+		{
+			'title': 'Tradeverlust',
+			'classes': 'trading-loss'
+		},
+		{
+			'title': 'Wichtig',
+			'classes': 'important'
+		}
+	];
+
+	/* ***********************************************
+	 * Sample Stock3 Editor build initialization
+	 * *********************************************** */
 	Stock3Editor.create(
 		document.querySelector( '#editor' ),
 		{
@@ -79,8 +322,13 @@
 					},
 				],
 			},
+			stock3colors: {
+				availableStyles
+			}
 		}
-	).catch( error => console.error( 'There was a problem initializing the editor.', error ));
+	)
+		.then(editor => {window.CKEditorInspector?.attach( editor )})
+		.catch( error => console.error( 'There was a problem initializing the editor.', error ));
 </script>
 
 </body>
