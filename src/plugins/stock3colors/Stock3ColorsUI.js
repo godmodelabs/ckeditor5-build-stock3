@@ -2,17 +2,17 @@ import { Plugin } from 'ckeditor5/src/core';
 import { createDropdown, addToolbarToDropdown } from 'ckeditor5/src/ui';
 import { Collection } from 'ckeditor5/src/utils';
 import Stock3ColorsUIButton from './Stock3ColorsUIButton';
+import Stock3ColorsList from './Stock3ColorsList';
 
 const STOCK3STYLE = 'stock3Style';
 
 export default class Stock3ColorsUI extends Plugin {
 	init() {
 		const editor = this.editor;
-		const availableStyles = editor.config.get( 'stock3colors.availableStyles' );
-		const titleByClasses = availableStyles.reduce( ( acc, curr ) => {
-			acc[ curr.classes ] = curr.title;
-			return acc;
-		}, {} );
+		const colorsHelper = new Stock3ColorsList( editor.config.get( 'stock3colors.enabledStyles' ) );
+		const availableStyles = colorsHelper.getAvailable();
+		const uiListClassName = editor.config.get( 'stock3colors.uiListClassName' ) || '';
+		const titleByClasses = colorsHelper.getTitleByClasses();
 
 		editor.ui.componentFactory.add( 'stock3colors', locale => {
 			const itemDefinitions = new Collection();
@@ -43,7 +43,7 @@ export default class Stock3ColorsUI extends Plugin {
 			addToolbarToDropdown( dropdownView, itemDefinitions );
 
 			dropdownView.toolbarView.set( {
-				class: 'stock3 stock3-style-toolbar'
+				class: `stock3 stock3-style-toolbar ${ uiListClassName }`
 			} );
 			dropdownView.buttonView.set( {
 				isOn: false,
@@ -51,7 +51,7 @@ export default class Stock3ColorsUI extends Plugin {
 				tooltip: 'Format-Stile'
 			} );
 
-			dropdownView.bind( 'isEnabled' ).to( command, 'isEnabled' );
+			dropdownView.bind( 'isEnabled' ).to( command, 'isEnabled', _ => _ && availableStyles.length );
 			dropdownView.buttonView.bind( 'label' ).to( command, 'value', _ => _ ? titleByClasses[ _ ] : 'Standard' );
 
 			return dropdownView;
