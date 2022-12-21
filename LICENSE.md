@@ -1,21 +1,17 @@
 Software License Agreement
 ==========================
 
-**CKEditor 5 classic editor build** – https://github.com/ckeditor/ckeditor5-build-classic <br>
-Copyright (c) 2003-2021, [CKSource](http://cksource.com) Frederico Knabben. All rights reserved.
+**CKEditor stock3 AG custom build** <br>
+Copyright (c) 2003-2022, [stock3 AG](https://stock3.com) All rights reserved.
 
-Licensed under the terms of [GNU General Public License Version 2 or later](http://www.gnu.org/licenses/gpl.html).
+Licensed under the terms of [GNU General Public License Version 2 or later](https://www.gnu.org/licenses/gpl.html).
 
-Sources of Intellectual Property Included in CKEditor
+Sources of Intellectual Property Included
 -----------------------------------------------------
 
-Where not otherwise indicated, all CKEditor content is authored by CKSource engineers and consists of CKSource-owned intellectual property. In some specific instances, CKEditor will incorporate work done by developers outside of CKSource with their express permission.
+Where not otherwise indicated, all plugin content is authored by stock3 engineers and consists of stock3-owned intellectual property. In some specific instances, stock3 AG will incorporate work done by developers outside of stock3
 
-The following libraries are included in CKEditor under the [MIT license](https://opensource.org/licenses/MIT):
+The following libraries are included with their respective licence:
 
-* Lo-Dash - Copyright (c) JS Foundation and other contributors https://js.foundation/. Based on Underscore.js, copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors http://underscorejs.org/.
-
-Trademarks
-----------
-
-**CKEditor** is a trademark of [CKSource](http://cksource.com) Frederico Knabben. All other brand and product names are trademarks, registered trademarks or service marks of their respective holders.
+* CKEditor 5 classic editor build – https://github.com/ckeditor/ckeditor5-build-classic
+Copyright (c) [CKSource](https://cksource.com) Frederico Knabben. All rights reserved.

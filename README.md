@@ -1,70 +1,25 @@
-CKEditor 5 classic editor build
-========================================
+# stock3 CKEditor 5 build
 
-[![npm version](https://badge.fury.io/js/%40ckeditor%2Fckeditor5-build-classic.svg)](https://www.npmjs.com/package/@ckeditor/ckeditor5-build-classic)
-[![Coverage Status](https://coveralls.io/repos/github/ckeditor/ckeditor5/badge.svg?branch=master)](https://coveralls.io/github/ckeditor/ckeditor5?branch=master)
-[![Build Status](https://travis-ci.com/ckeditor/ckeditor5.svg?branch=master)](https://travis-ci.com/ckeditor/ckeditor5)
+This custom CKEditor build is based on the classic [CKEditor 5](https://ckeditor.com/ckeditor-5/) build.
 
-The classic editor build for CKEditor 5. Read more about the [classic editor build](https://ckeditor.com/docs/ckeditor5/latest/builds/guides/overview.html#classic-editor) and see the [demo](https://ckeditor.com/docs/ckeditor5/latest/examples/builds/classic-editor.html).
+Please note that the repository on GitHub is mirrored and read-only.
+If you find bugs or want to suggest features specific to this custom build, kindly contact us at kundenservice@stock3.com
 
-![CKEditor 5 classic editor build screenshot](https://c.cksource.com/a/1/img/npm/ckeditor5-build-classic.png)
+## Usage notes
+Please refer to the CKEditor documentation on how to initialize the editor build 
 
-## Documentation
+### Charting Plugin
+The charting integration requires an adapter that will load the available chart images. At the time of writing this adapter must be configured as an editor extraPlugins.
 
-See:
+A sample implementation for such an adapter and required configuration can be found in sample/index.html
 
-* [Installation](https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/installation.html) for how to install this package and what it contains.
-* [Basic API](https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/basic-api.html) for how to create an editor and interact with it.
-* [Configuration](https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/configuration.html) for how to configure the editor.
-* [Creating custom builds](https://ckeditor.com/docs/ckeditor5/latest/builds/guides/development/custom-builds.html) for how to customize the build (configure and rebuild the editor bundle).
+## Development
+### Develop
+````
+npm i
+npm run watch
+````
+You can then open ``sample/index.html`` with any browser to test and debug your build
 
-## Quick start
-
-First, install the build from npm:
-
-```bash
-npm install --save @ckeditor/ckeditor5-build-classic
-```
-
-And use it in your website:
-
-```html
-<div id="editor">
-	<p>This is the editor content.</p>
-</div>
-<script src="./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
-<script>
-	ClassicEditor
-		.create( document.querySelector( '#editor' ) )
-		.then( editor => {
-			window.editor = editor;
-		} )
-		.catch( error => {
-			console.error( 'There was a problem initializing the editor.', error );
-		} );
-</script>
-```
-
-Or in your JavaScript application:
-
-```js
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
-// Or using the CommonJS version:
-// const ClassicEditor = require( '@ckeditor/ckeditor5-build-classic' );
-
-ClassicEditor
-	.create( document.querySelector( '#editor' ) )
-	.then( editor => {
-		window.editor = editor;
-	} )
-	.catch( error => {
-		console.error( 'There was a problem initializing the editor.', error );
-	} );
-```
-
-**Note:** If you are planning to integrate CKEditor 5 deep into your application, it is actually more convenient and recommended to install and import the source modules directly (like it happens in `ckeditor.js`). Read more in the [Advanced setup guide](https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/advanced-setup.html).
-
-## License
-
-Licensed under the terms of [GNU General Public License Version 2 or later](http://www.gnu.org/licenses/gpl.html). For full details about the license, please check the `LICENSE.md` file or [https://ckeditor.com/legal/ckeditor-oss-license](https://ckeditor.com/legal/ckeditor-oss-license).
+### Release
+You can test a release build by running ``npm run build`` and opening ``sample/index.html`` in your browser

@@ -1,25 +1,8 @@
 {
   "name": "@stock3/ckeditor5-build-stock3",
-  "version": "35.4.0-stock3-1",
-  "description": "The classic editor build of CKEditor 5 – the best browser-based rich text editor.",
-  "keywords": [
-    "ckeditor5-build",
-    "ckeditor",
-    "ckeditor5",
-    "ckeditor 5",
-    "wysiwyg",
-    "rich text",
-    "editor",
-    "html",
-    "contentEditable",
-    "editing",
-    "operational transformation",
-    "ot",
-    "collaboration",
-    "collaborative",
-    "real-time",
-    "framework"
-  ],
+  "version": "2.0.0",
+  "description": "stock3 CKEditor build, based on the classic editor build of CKEditor 5",
+  "private": "true",
   "main": "./build/ckeditor.js",
   "files": [
     "build",
@@ -31,12 +14,13 @@
     "@ckeditor/ckeditor5-editor-classic": "^35.4.0",
     "@ckeditor/ckeditor5-essentials": "^35.4.0",
     "@ckeditor/ckeditor5-font": "^35.4.0",
-    "@ckeditor/ckeditor5-image": "^35.4.0",
+    "@ckeditor/ckeditor5-heading": "^35.4.0",
     "@ckeditor/ckeditor5-html-embed": "^35.4.0",
+    "@ckeditor/ckeditor5-image": "^35.4.0",
     "@ckeditor/ckeditor5-link": "^35.4.0",
+    "@ckeditor/ckeditor5-mention": "^35.4.0",
     "@ckeditor/ckeditor5-paragraph": "^35.4.0",
-    "@ckeditor/ckeditor5-ui": "^35.4.0",
-    "@ckeditor/ckeditor5-mention": "^35.4.0"
+    "@ckeditor/ckeditor5-ui": "^35.4.0"
   },
   "devDependencies": {
     "@ckeditor/ckeditor5-core": "^35.4.0",
@@ -57,15 +41,8 @@
     "node": ">=14.0.0",
     "npm": ">=5.7.1"
   },
-  "author": "CKSource (http://cksource.com/)",
+  "author": "stock3 AG",
   "license": "GPL-2.0-or-later",
-  "homepage": "https://ckeditor.com/ckeditor-5",
-  "bugs": "https://github.com/ckeditor/ckeditor5/issues",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ckeditor/ckeditor5.git",
-    "directory": "packages/ckeditor5-build-classic"
-  },
   "scripts": {
     "build": "webpack --mode production",
     "watch": "webpack --mode development --watch",
