@@ -1,6 +1,6 @@
 {
   "name": "@stock3/ckeditor5-build-stock3",
-  "version": "1.2.0-feature-semantic-release.4",
+  "version": "1.2.0",
   "description": "stock3 CKEditor build, based on the classic editor build of CKEditor 5",
   "main": "./build/ckeditor.js",
   "files": [
