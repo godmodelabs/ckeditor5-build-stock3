@@ -1,0 +1,49 @@
+stages:
+    - sonarqube
+    - release
+
+sonarqube-check:
+    stage: sonarqube
+    image:
+        name: sonarsource/sonar-scanner-cli:latest
+        entrypoint: [""]
+    variables:
+        SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
+        GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+    cache:
+        key: "${CI_JOB_NAME}"
+        paths:
+            - .sonar/cache
+    script:
+        - sonar-scanner
+    allow_failure: true
+    rules:
+        - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+        - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+publish-release:
+    stage: release
+    image: node:16
+    script:
+        # setup git
+        - apt-get update && apt-get install -yqq git
+        - mkdir -p ~/.ssh/
+        - echo "$GITLAB_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        - chmod 600 ~/.ssh/id_rsa
+        - ssh-keyscan -p 2022 -H $CI_SERVER_HOST >> ~/.ssh/known_hosts
+        - git config --global user.email "gitlab@service.boerse-go.de"
+        - git config --global user.name "GitLab CI-CD"
+        - git remote set-url --push origin $CI_REPOSITORY_URL
+        - git fetch --tags
+        # setup npm
+        - npm config set "registry=http://npm.srv.dc1.boerse-go.de:4873/"
+        - npm config set "//npm.srv.dc1.boerse-go.de:4873/:_authToken=$NPM_PUBLISH_TOKEN"
+        # install and release
+        - npm ci
+        - npx semantic-release
+    rules:
+        - if: $CI_COMMIT_TAG # not on tag-pushes that this job generates
+          when: never
+        - if: $CI_COMMIT_MESSAGE =~ /^chore\(release\)/ # not on release-commits that this job generates
+          when: never
+        - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

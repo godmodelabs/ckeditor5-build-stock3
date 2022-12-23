@@ -22,4 +22,6 @@ npm run watch
 You can then open ``sample/index.html`` with any browser to test and debug your build
 
 ### Release
-You can test a release build by running ``npm run build`` and opening ``sample/index.html`` in your browser
+You can test a release build by running ``npm run build`` and opening ``sample/index.html`` in your browser.
+
+Every commit to the main branch will trigger a new release. Version numbers are determined automatically using [Convetional Commits](https://www.conventionalcommits.org/en/v1.0.0/) and updated and released with the help of the [Semantic Release](https://www.npmjs.com/package/semantic-release) tool
