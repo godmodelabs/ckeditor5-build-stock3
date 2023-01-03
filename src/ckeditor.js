@@ -8,7 +8,6 @@ import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
 import ImageBlock from '@ckeditor/ckeditor5-image/src/imageblock';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-import Heading from '@ckeditor/ckeditor5-heading/src/heading';
 import Mention from '@ckeditor/ckeditor5-mention/src/mention';
 
 // Stock3 Custom Plugins
@@ -28,7 +27,6 @@ Stock3Editor.builtinPlugins = [
 	Link,
 	ImageBlock,
 	Paragraph,
-	Heading,
 	Mention,
 
 	// Custom
@@ -49,7 +47,6 @@ Stock3Editor.defaultConfig = {
 		'emojis',
 		'charting',
 		'|',
-		'heading',
 		'stock3colors'
 	],
 
