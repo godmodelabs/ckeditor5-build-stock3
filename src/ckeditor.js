@@ -6,6 +6,7 @@ import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
 import ImageBlock from '@ckeditor/ckeditor5-image/src/imageblock';
+import AutoImage from '@ckeditor/ckeditor5-image/src/autoimage';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import Mention from '@ckeditor/ckeditor5-mention/src/mention';
@@ -26,6 +27,7 @@ Stock3Editor.builtinPlugins = [
 	Italic,
 	Link,
 	ImageBlock,
+	AutoImage,
 	Paragraph,
 	Mention,
 
