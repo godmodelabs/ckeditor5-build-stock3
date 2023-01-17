@@ -110,15 +110,18 @@ export default class Stock3VideoEditing extends Plugin {
 		let type = null;
 		switch ( url.hostname ) {
 			case 'youtube.com':
+			case 'www.youtube.com':
 			case 'm.youtube.com':
 			case 'youtu.be':
 				type = 'youtube';
 				break;
 			case 'vimeo.com':
+			case 'www.vimeo.com':
 			case 'player.vimeo.com':
 				type = 'vimeo';
 				break;
 			case 'twitter.com':
+			case 'www.twitter.com':
 				type = 'twitter';
 				break;
 		}
