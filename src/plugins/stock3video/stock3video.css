@@ -1,0 +1,32 @@
+.stock3video {
+    padding: 10px;
+    text-align: center;
+
+    background: rgb(236,239,246);
+    background: linear-gradient(90deg, rgba(236,239,246,1) 0%, rgba(166,168,173,1) 100%);
+}
+.stock3video .stock3video-title {
+    font-weight: bold;
+    font-size: 1.75em;
+    margin-bottom: 5px;
+}
+.stock3video .stock3video-url {
+    font-weight: lighter;
+    font-size: 0.75em;
+    font-style: italic;
+}
+.stock3video.youtube{
+    background: rgb(255,0,0);
+    background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(159,0,0,1) 100%);
+    color: white;
+}
+.stock3video.twitter{
+    background: rgb(29,161,242);
+    background: linear-gradient(90deg, rgba(29,161,242,1) 0%, rgba(18,100,150,1) 100%);
+    color: white;
+}
+.stock3video.vimeo{
+    background: rgb(26,183,234);
+    background: linear-gradient(90deg, rgba(26,183,234,1) 0%, rgba(17,123,157,1) 100%);
+    color: white;
+}

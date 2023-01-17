@@ -17,6 +17,7 @@ import Emojis from './plugins/emojis/Emojis';
 import Charting from './plugins/charting/Charting';
 import MentionCustomization from './plugins/mentionCustomization/MentionCustomization';
 import Stock3Colors from './plugins/stock3colors/Stock3Colors';
+import Stock3Video from './plugins/stock3video/Stock3Video';
 
 export default class Stock3Editor extends ClassicEditorBase {}
 
@@ -36,7 +37,8 @@ Stock3Editor.builtinPlugins = [
 	Emojis,
 	Charting,
 	Stock3Colors,
-	MentionCustomization
+	MentionCustomization,
+	Stock3Video
 ];
 
 // Editor configuration.

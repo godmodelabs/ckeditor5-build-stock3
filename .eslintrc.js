@@ -8,9 +8,17 @@
 'use strict';
 
 module.exports = {
+	extends: 'ckeditor5',
+	ignorePatterns: [
+		'node_modules/*',
+	],
 	rules: {
 		'ckeditor5-rules/ckeditor-imports': 'off',
 		'no-debugger': 'off',
 		'ckeditor5-rules/license-header': 'off'
+	},
+	env: {
+		browser: true,
+		node: true,
 	}
 };
