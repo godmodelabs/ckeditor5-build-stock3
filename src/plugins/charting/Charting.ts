@@ -1,16 +1,29 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import { Plugin } from '@ckeditor/ckeditor5-core';
+import { createDropdown, addToolbarToDropdown } from '@ckeditor/ckeditor5-ui';
 import ChartView from './ChartView';
-import { createDropdown, addToolbarToDropdown } from '@ckeditor/ckeditor5-ui/src/dropdown/utils';
 import chartIcon from './chart.svg';
 import './charting.css';
+import type { BaseEvent, GetCallback } from '@ckeditor/ckeditor5-utils';
+
+export type Chart = {
+	imageSrc: string;
+    thumbSrc: string;
+    chartName: string;
+    instrumentName: string;
+	id: number;
+};
+
+export interface Stock3CKEditorChartingAdapter {
+	getCharts(): Promise<Array<Chart>>;
+}
 
 export default class Charting extends Plugin {
-	constructor( arg ) {
-		super( arg );
-		this.adapter = null;
-	}
+	/**
+     * Provided by the application and must be set before calling `Charting#init()`.
+	 */
+	public adapter: Stock3CKEditorChartingAdapter | null = null;
 
-	init() {
+	public init(): void {
 		const schema = this.editor.model.schema;
 		const imageBlockRegistered = schema.isRegistered( 'imageBlock' );
 		const imageInlineRegistered = schema.isRegistered( 'imageInline' );
@@ -28,11 +41,8 @@ export default class Charting extends Plugin {
 
 		/**
 		 * Downcast handler that puts the data-chartid attribute on the img element, not the containing element
-		 * @param evt
-		 * @param data
-		 * @param conversionApi
 		 */
-		const convertChartId = ( evt, data, conversionApi ) => {
+		const convertChartId: GetCallback<BaseEvent> = ( evt, data, conversionApi ) => {
 			if ( !conversionApi.consumable.consume( data.item, evt.name ) ) {
 				return;
 			}
@@ -59,9 +69,8 @@ export default class Charting extends Plugin {
 		} );
 	}
 
-	afterInit() {
-		if ( !this.adapter || !this.adapter.getCharts ) {
-			// eslint-disable-next-line no-undef
+	public afterInit(): Promise<void> | void {
+		if ( !this.adapter ) {
 			console.warn( 'ckeditor Charting Plugin disabled, adapter not found' );
 			return;
 		}
@@ -97,7 +106,7 @@ export default class Charting extends Plugin {
 
 					addToolbarToDropdown( dropdownView, buttons );
 
-					dropdownView.toolbarView.set( {
+					dropdownView.toolbarView?.set( {
 						class: 'stock3 stock3-charting-toolbar'
 					} );
 
@@ -106,7 +115,7 @@ export default class Charting extends Plugin {
 			} );
 	}
 
-	static get pluginName() {
-		return 'Charting';
+	public static get pluginName() {
+		return 'Charting' as const;
 	}
 }

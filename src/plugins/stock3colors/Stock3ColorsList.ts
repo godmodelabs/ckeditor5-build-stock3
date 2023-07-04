@@ -75,25 +75,31 @@ const styles = [
 		'title': 'Wichtig',
 		'classes': 'important'
 	}
-];
+] as const;
+
+type Stock3Style = typeof styles[number];
 
 export default class Stock3ColorsList {
-	constructor( enabledList ) {
-		this._available = enabledList /* && enabledList.length */?
+	private available: ReadonlyArray<Stock3Style>;
+
+	private titleByClasses: Record<string, string>;
+
+	constructor( enabledList?: Array<string> ) {
+		this.available = enabledList ?
 			styles.filter( _ => enabledList.includes( _.classes ) ) :
 			styles;
 
-		this._titleByClasses = this._available.reduce( ( acc, curr ) => {
+		this.titleByClasses = this.available.reduce( ( acc, curr ) => {
 			acc[ curr.classes ] = curr.title;
 			return acc;
-		}, {} );
+		}, {} as Record<string, string> );
 	}
 
-	getAvailable() {
-		return this._available;
+	public getAvailable(): ReadonlyArray<Stock3Style> {
+		return this.available;
 	}
 
-	getTitleByClasses() {
-		return this._titleByClasses;
+	public getTitleByClasses(): Record<string, string> {
+		return this.titleByClasses;
 	}
 }

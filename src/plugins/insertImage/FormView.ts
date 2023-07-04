@@ -1,11 +1,16 @@
-import checkIcon from '@ckeditor/ckeditor5-core/theme/icons/check.svg';
-import cancelIcon from '@ckeditor/ckeditor5-core/theme/icons/cancel.svg';
-import View from '@ckeditor/ckeditor5-ui/src/view';
-import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
+import { icons } from '@ckeditor/ckeditor5-core';
+import { ButtonView, View } from '@ckeditor/ckeditor5-ui';
 import InputView from './InputView';
+import { type Locale } from '@ckeditor/ckeditor5-utils';
 
-export default class FormView extends View {
-	constructor( locale ) {
+export default class FormView extends View<HTMLFormElement> {
+	public inputView: InputView;
+
+	public acceptButton: ButtonView;
+
+	public cancelButton: ButtonView;
+
+	constructor( locale?: Locale ) {
 		super( locale );
 
 		this.inputView = new InputView( locale );
@@ -14,7 +19,7 @@ export default class FormView extends View {
 		this.acceptButton.set( {
 			type: 'submit',
 			label: 'Speichern',
-			icon: checkIcon,
+			icon: icons.check,
 			tooltip: true,
 			class: 'stock3 stock3-accept'
 		} );
@@ -22,7 +27,7 @@ export default class FormView extends View {
 		this.cancelButton = new ButtonView( locale );
 		this.cancelButton.set( {
 			label: 'Abbrechen',
-			icon: cancelIcon,
+			icon: icons.cancel,
 			tooltip: true,
 			class: 'stock3 stock3-cancel'
 		} );

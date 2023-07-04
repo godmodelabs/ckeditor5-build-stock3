@@ -1,7 +1,9 @@
-import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
+import { ButtonView } from '@ckeditor/ckeditor5-ui';
+import { type Locale } from '@ckeditor/ckeditor5-utils';
+import { type Chart } from './Charting';
 
 export default class ChartView extends ButtonView {
-	constructor( locale, chart ) {
+	constructor( locale: Locale, chartConfig: Chart ) {
 		super( locale );
 
 		this.setTemplate( {
@@ -10,7 +12,7 @@ export default class ChartView extends ButtonView {
 				{
 					tag: 'img',
 					attributes: {
-						src: chart.thumbSrc
+						src: chartConfig.thumbSrc
 					}
 				},
 				{
@@ -18,12 +20,12 @@ export default class ChartView extends ButtonView {
 					children: [
 						{
 							tag: 'span',
-							children: [ chart.chartName ],
+							children: [ chartConfig.chartName ],
 							attributes: { class: [ 'stock3', 'stock3-charting-chartName' ] }
 						},
 						{
 							tag: 'span',
-							children: [ chart.instrumentName ],
+							children: [ chartConfig.instrumentName ],
 							attributes: { class: [ 'stock3', 'stock3-charting-instrumentName' ] }
 						}
 					],

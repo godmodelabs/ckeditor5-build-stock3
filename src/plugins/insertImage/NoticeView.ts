@@ -1,7 +1,8 @@
-import View from '@ckeditor/ckeditor5-ui/src/view';
+import { View } from '@ckeditor/ckeditor5-ui';
+import { type Locale } from '@ckeditor/ckeditor5-utils';
 
-export default class NoticeView extends View {
-	constructor( locale ) {
+export default class NoticeView extends View<HTMLLIElement> {
+	constructor( locale?: Locale ) {
 		super( locale );
 
 		this.setTemplate( {
@@ -13,11 +14,11 @@ export default class NoticeView extends View {
 				{
 					tag: 'ul',
 					children: [
-						this._createItem( 'https://picload.org/' ),
-						this._createItem( 'https://www.pic-upload.de/' ),
-						this._createItem( 'https://gifyu.com/' ),
-						this._createItem( 'https://postimage.io/' ),
-						this._createItem( 'https://imgbox.com/' )
+						this.createItem( 'https://picload.org/' ),
+						this.createItem( 'https://www.pic-upload.de/' ),
+						this.createItem( 'https://gifyu.com/' ),
+						this.createItem( 'https://postimage.io/' ),
+						this.createItem( 'https://imgbox.com/' )
 					]
 				}
 			],
@@ -30,7 +31,7 @@ export default class NoticeView extends View {
 		} );
 	}
 
-	_createItem( href ) {
+	private createItem( href: string ) {
 		return {
 			tag: 'li',
 			children: [ {

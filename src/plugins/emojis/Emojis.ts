@@ -1,11 +1,10 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
-import { createDropdown, addToolbarToDropdown } from '@ckeditor/ckeditor5-ui/src/dropdown/utils';
+import { Plugin } from '@ckeditor/ckeditor5-core';
+import { ButtonView, createDropdown, addToolbarToDropdown } from '@ckeditor/ckeditor5-ui';
+import emojiList from './emojiList';
 import emojiIcon from './emoji.svg';
-import emojiList from './emoji.list';
 
 export default class Emojis extends Plugin {
-	init() {
+	public init(): void {
 		const editor = this.editor;
 
 		editor.ui.componentFactory.add( 'emojis', locale => {
@@ -33,7 +32,7 @@ export default class Emojis extends Plugin {
 
 			addToolbarToDropdown( view, buttons );
 
-			view.toolbarView.set( {
+			view.toolbarView?.set( {
 				maxWidth: '395px'
 			} );
 
@@ -41,7 +40,7 @@ export default class Emojis extends Plugin {
 		} );
 	}
 
-	static get pluginName() {
-		return 'Emojis';
+	public static get pluginName() {
+		return 'Emojis' as const;
 	}
 }

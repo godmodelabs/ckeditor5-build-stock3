@@ -1,7 +1,10 @@
-import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
+import { ButtonView } from '@ckeditor/ckeditor5-ui';
+import { type Locale } from '@ckeditor/ckeditor5-utils';
+
+type LabelInfo = { title: string; classes: string };
 
 export default class Stock3ColorsUIButton extends ButtonView {
-	constructor( locale, labelInfo ) {
+	constructor( locale: Locale, labelInfo: LabelInfo ) {
 		super( locale );
 
 		this.setTemplate( {

@@ -1,11 +1,12 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import { Plugin } from '@ckeditor/ckeditor5-core';
+import { type Element } from '@ckeditor/ckeditor5-engine';
 
 /**
  * This will transform user mentionings from the default output to the output that the api accepts as mention
  * @see example https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#customizing-the-output
  */
 export default class MentionCustomization extends Plugin {
-	init() {
+	public init(): void {
 		const editor = this.editor;
 
 		// Transform from dom to model
@@ -16,10 +17,11 @@ export default class MentionCustomization extends Plugin {
 			},
 			model: {
 				key: 'mention',
-				value: viewItem => {
+				value: ( viewItem: Element ) => {
 					return editor.plugins.get( 'Mention' ).toMentionAttribute( viewItem, {
-						// other properties
-						userId: viewItem.getAttribute( 'data-user-id' )
+						// @ts-expect-error This works, it's an issue w/ CKEditor's types. It's exactly the code they
+						// use in the doc example.
+						userId: String( viewItem.getAttribute( 'data-user-id' ) )
 					} );
 				}
 			},
@@ -48,7 +50,7 @@ export default class MentionCustomization extends Plugin {
 		} );
 	}
 
-	static get pluginName() {
-		return 'MentionCustomization';
+	public static get pluginName() {
+		return 'MentionCustomization' as const;
 	}
 }

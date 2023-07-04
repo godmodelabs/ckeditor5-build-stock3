@@ -38,4 +38,4 @@ export default [
 	'↘',
 	'✔',
 	'❌'
-];
+] as const;

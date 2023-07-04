@@ -1,11 +1,12 @@
-import { Plugin } from 'ckeditor5/src/core';
+import { Plugin } from '@ckeditor/ckeditor5-core';
 import Stock3ColorsCommand from './Stock3ColorsCommand';
 import Stock3ColorsList from './Stock3ColorsList';
+import { type Element } from '@ckeditor/ckeditor5-engine';
 
 const STOCK3STYLE = 'stock3Style';
 
 export default class Stock3ColorsEditing extends Plugin {
-	init() {
+	public init(): void {
 		const editor = this.editor;
 
 		editor.model.schema.extend( '$text', { allowAttributes: STOCK3STYLE } );
@@ -23,7 +24,7 @@ export default class Stock3ColorsEditing extends Plugin {
 			}
 		} );
 
-		const availableStyles = new Stock3ColorsList( editor.config.get( 'stock3colors.enabledStyles' ) ).getAvailable();
+		const availableStyles = new Stock3ColorsList( (editor.config.get( 'stock3colors.enabledStyles' ) ?? []) as string[] ).getAvailable();
 
 		const regex = new RegExp( availableStyles.map( _ => _.classes ).join( '|' ) );
 
@@ -35,7 +36,7 @@ export default class Stock3ColorsEditing extends Plugin {
 				},
 				model: {
 					key: STOCK3STYLE,
-					value: viewElement => viewElement.getAttribute( 'class' )
+					value: ( viewElement: Element ) => viewElement.getAttribute( 'class' )
 				}
 			} );
 		}

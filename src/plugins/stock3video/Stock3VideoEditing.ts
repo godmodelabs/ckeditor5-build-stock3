@@ -1,18 +1,17 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import { toWidget, viewToModelPositionOutsideModelElement } from '@ckeditor/ckeditor5-widget/src/utils';
-import Widget from '@ckeditor/ckeditor5-widget/src/widget';
+import { Plugin } from '@ckeditor/ckeditor5-core';
+import { Widget, toWidget, viewToModelPositionOutsideModelElement } from '@ckeditor/ckeditor5-widget';
 
 export default class Stock3VideoEditing extends Plugin {
-	static get requires() {
-		return [ Widget ];
+	public static get requires() {
+		return [ Widget ] as const;
 	}
 
-	init() {
-		this._defineSchema();
-		this._setupConverters();
+	public init(): void {
+		this.defineSchema();
+		this.setupConverters();
 	}
 
-	_defineSchema() {
+	private defineSchema(): void {
 		const schema = this.editor.model.schema;
 
 		schema.register( 'media', {
@@ -23,21 +22,21 @@ export default class Stock3VideoEditing extends Plugin {
 		} );
 	}
 
-	_setupConverters() {
+	private setupConverters(): void {
 		const editor = this.editor;
 		editor.conversion.for( 'dataDowncast' ).elementToElement( {
 			model: 'media',
 			view: ( modelElement, { writer } ) => {
 				return writer.createContainerElement( 'p', {}, [
-					writer.createText( modelElement.getAttribute( 'url' ) )
+					writer.createText( String( modelElement.getAttribute( 'url' ) ) )
 				] );
 			}
 		} );
 		editor.conversion.for( 'editingDowncast' ).elementToStructure( {
 			model: 'media',
 			view: ( modelElement, { writer } ) => {
-				const url = modelElement.getAttribute( 'url' );
-				const type = modelElement.getAttribute( 'type' );
+				const url = String(modelElement.getAttribute( 'url' ));
+				const type = String(modelElement.getAttribute( 'type' ));
 				const section = writer.createContainerElement(
 					'div',
 					{
@@ -56,7 +55,7 @@ export default class Stock3VideoEditing extends Plugin {
 			viewToModelPositionOutsideModelElement( editor.model, viewElement => viewElement.hasClass( 'stock3video' ) )
 		);
 		editor.conversion.for( 'upcast' ).add( dispatcher => {
-			dispatcher.on( 'element:p', ( evt, data, conversionApi ) => {
+			dispatcher.on( 'element:p', ( _evt, data, conversionApi ) => {
 				const { viewItem } = data;
 				const {
 					consumable,
@@ -97,7 +96,7 @@ export default class Stock3VideoEditing extends Plugin {
 		} );
 	}
 
-	getMediaInfo( urlString ) {
+	public getMediaInfo( urlString: string ): { url: string; type: string } | null {
 		// test media string
 		let url;
 		try {

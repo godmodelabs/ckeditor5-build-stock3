@@ -1,16 +1,15 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import imageIcon from '@ckeditor/ckeditor5-core/theme/icons/image.svg';
-import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
-import BalloonPanelView, { generatePositions } from '@ckeditor/ckeditor5-ui/src/panel/balloon/balloonpanelview';
-import clickOutsideHandler from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsidehandler';
-import submitHandler from '@ckeditor/ckeditor5-ui/src/bindings/submithandler';
+import { icons, Plugin } from '@ckeditor/ckeditor5-core';
+import { clickOutsideHandler, submitHandler, ButtonView, BalloonPanelView } from '@ckeditor/ckeditor5-ui';
+// TODO: check out if this is available yet
+// eslint-disable-next-line ckeditor5-rules/allow-imports-only-from-main-package-entry-point
+import { generatePositions } from '@ckeditor/ckeditor5-ui/src/panel/balloon/balloonpanelview';
 import WrapperView from './WrapperView';
 import FormView from './FormView';
 import NoticeView from './NoticeView';
 import './insertImage.css';
 
 export default class InsertImage extends Plugin {
-	init() {
+	public init(): void {
 		const editor = this.editor;
 
 		editor.ui.componentFactory.add( 'insertImage', locale => {
@@ -22,7 +21,7 @@ export default class InsertImage extends Plugin {
 
 			// Cleanup and close everything
 			const close = () => {
-				form.element.reset();
+				form.element?.reset();
 				panel.unpin();
 				button.set( {
 					isOn: false,
@@ -32,8 +31,8 @@ export default class InsertImage extends Plugin {
 
 			// Generate positions that can be used by our panel
 			const positions = generatePositions( {
-				horizontalOffset: 0,
-				verticalOffset: 0,
+				sideOffset: 0,
+				heightOffset: 0,
 				config: { withArrow: false }
 			} );
 
@@ -43,7 +42,7 @@ export default class InsertImage extends Plugin {
 
 			button.set( {
 				label: 'Bild hinzufügen',
-				icon: imageIcon,
+				icon: icons.image,
 				tooltip: true,
 				isOn: false
 			} );
@@ -63,7 +62,7 @@ export default class InsertImage extends Plugin {
 
 				// Open our panel
 				panel.pin( {
-					target: button.element,
+					target: button.element!,
 					positions: [ positions.southWestArrowNorthWest ]
 				} );
 
@@ -71,15 +70,15 @@ export default class InsertImage extends Plugin {
 				clickOutsideHandler( {
 					emitter: wrapper,
 					activator: () => true,
-					contextElements: [ wrapper.element ],
+					contextElements: [ wrapper.element! ],
 					callback: close
 				} );
 
 				// Check if only a single image is selected, if so set that src as the default input value
 				const selection = editor.model.document.selection.getSelectedElement();
-				if ( selection && selection.name === 'imageBlock' ) {
-					const src = selection.getAttribute( 'src' );
-					if ( src ) {
+				if ( selection?.name === 'imageBlock' ) {
+					const src = ( selection as unknown as HTMLImageElement ).getAttribute( 'src' );
+					if ( src && form.inputView.element ) {
 						form.inputView.element.value = src;
 					}
 				}
@@ -91,12 +90,12 @@ export default class InsertImage extends Plugin {
 
 			panel.content.add( form );
 			panel.content.add( notice );
-			panel.on( 'change:isVisible', ( eventInfo, name, value ) => {
+			panel.on( 'change:isVisible', ( _eventInfo, _name, value ) => {
 				// Auto focus after opening the panel
 				if ( value ) {
 					// delay until all css classes are set, so that the input is visible
 					// eslint-disable-next-line no-undef
-					setTimeout( () => form.inputView.element.focus(), 0 );
+					setTimeout( () => form.inputView.element?.focus(), 0 );
 				}
 			} );
 
@@ -106,14 +105,16 @@ export default class InsertImage extends Plugin {
 
 			submitHandler( { view: form } );
 			form.on( 'submit', ( { source } ) => {
-				// eslint-disable-next-line no-undef
-				const formData = new FormData( source.element );
-				const url = formData.get( 'url' );
-				if ( url ) {
-					editor.model.change( writer => {
-						const imageElement = writer.createElement( 'imageBlock', { src: url } );
-						editor.model.insertContent( imageElement, editor.model.document.selection );
-					} );
+				const formView = source as FormView;
+				if ( formView.element ) {
+					const formData = new FormData( formView.element );
+					const url = formData.get( 'url' );
+					if ( url ) {
+						editor.model.change( writer => {
+							const imageElement = writer.createElement( 'imageBlock', { src: url } );
+							editor.model.insertContent( imageElement, editor.model.document.selection );
+						} );
+					}
 				}
 				close();
 			} );
@@ -124,7 +125,7 @@ export default class InsertImage extends Plugin {
 		} );
 	}
 
-	static get pluginName() {
-		return 'InsertImage';
+	public static get pluginName() {
+		return 'InsertImage' as const;
 	}
 }

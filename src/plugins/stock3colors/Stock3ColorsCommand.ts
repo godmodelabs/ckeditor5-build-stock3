@@ -1,4 +1,4 @@
-import Command from '@ckeditor/ckeditor5-core/src/command';
+import { Command } from '@ckeditor/ckeditor5-core';
 
 const STOCK3STYLE = 'stock3Style';
 
@@ -8,11 +8,10 @@ export default class Stock3ColorsCommand extends Command {
 	 * If no `value` is passed, it removes the attribute from the selection.
 	 *
 	 * @protected
-	 * @param {Object} [options] Options for the executed command.
 	 * @param {String} [options.value] The value to apply.
 	 * @fires execute
 	 */
-	execute( options = {} ) {
+	public execute( options: { value?: string } = {} ): void {
 		const model = this.editor.model;
 		const doc = model.document;
 		const selection = doc.selection;
@@ -42,7 +41,7 @@ export default class Stock3ColorsCommand extends Command {
 	/**
 	 * Updates the command's {@link #value} and {@link #isEnabled} based on the current selection.
 	 */
-	refresh() {
+	public refresh(): void {
 		const model = this.editor.model;
 		const selection = model.document.selection;
 

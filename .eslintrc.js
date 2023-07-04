@@ -10,7 +10,7 @@
 module.exports = {
 	extends: 'ckeditor5',
 	ignorePatterns: [
-		'node_modules/*',
+		'node_modules/*'
 	],
 	rules: {
 		'ckeditor5-rules/ckeditor-imports': 'off',
@@ -19,6 +19,6 @@ module.exports = {
 	},
 	env: {
 		browser: true,
-		node: true,
+		node: true
 	}
 };
