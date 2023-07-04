@@ -23,7 +23,7 @@ sonarqube-check:
 
 publish-release:
     stage: release
-    image: node:16
+    image: node:18
     script:
         # setup git
         - apt-get update && apt-get install -yqq git
