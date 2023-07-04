@@ -1,9 +1,9 @@
 import { ButtonView } from '@ckeditor/ckeditor5-ui';
 import { type Locale } from '@ckeditor/ckeditor5-utils';
-import { type Chart } from './Charting';
+import { type Stock3CKEditorChart } from './Charting';
 
 export default class ChartView extends ButtonView {
-	constructor( locale: Locale, chartConfig: Chart ) {
+	constructor( locale: Locale, chartConfig: Stock3CKEditorChart ) {
 		super( locale );
 
 		this.setTemplate( {

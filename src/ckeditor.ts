@@ -55,3 +55,9 @@ export default class Stock3Editor extends ClassicEditor {
 		language: 'de'
 	};
 }
+
+export {
+	type default as Stock3CKEditorChartingPlugin,
+	type Stock3CKEditorChartingAdapter,
+	type Stock3CKEditorChart
+} from './plugins/charting/Charting';

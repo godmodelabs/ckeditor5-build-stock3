@@ -5,7 +5,7 @@ import chartIcon from './chart.svg';
 import './charting.css';
 import type { BaseEvent, GetCallback } from '@ckeditor/ckeditor5-utils';
 
-export type Chart = {
+export type Stock3CKEditorChart = {
 	imageSrc: string;
     thumbSrc: string;
     chartName: string;
@@ -14,10 +14,10 @@ export type Chart = {
 };
 
 export interface Stock3CKEditorChartingAdapter {
-	getCharts(): Promise<Array<Chart>>;
+	getCharts(): Promise<Array<Stock3CKEditorChart>>;
 }
 
-export default class Charting extends Plugin {
+export default class Stock3CKEditorChartingPlugin extends Plugin {
 	/**
      * Provided by the application and must be set before calling `Charting#init()`.
 	 */
