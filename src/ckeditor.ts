@@ -28,7 +28,6 @@ export default class Stock3Editor extends ClassicEditor {
 		AutoImage,
 		Paragraph,
 		Mention,
-
 		// Custom
 		InsertImage,
 		Emojis,
@@ -50,7 +49,6 @@ export default class Stock3Editor extends ClassicEditor {
 			'|',
 			'stock3colors'
 		],
-
 		// This value must be kept in sync with the language defined in webpack.config.js.
 		language: 'de'
 	};
