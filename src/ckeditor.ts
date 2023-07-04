@@ -4,10 +4,13 @@ import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
 // CKEditor Plugins
 import { Essentials } from '@ckeditor/ckeditor5-essentials';
 import { Bold, Italic } from '@ckeditor/ckeditor5-basic-styles';
-import { ImageBlock, AutoImage } from '@ckeditor/ckeditor5-image';
+import { AutoImage } from '@ckeditor/ckeditor5-image';
 import { Link } from '@ckeditor/ckeditor5-link';
 import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
 import { Mention } from '@ckeditor/ckeditor5-mention';
+// isn't exported correctly in CKEditor 5 v37
+// eslint-disable-next-line ckeditor5-rules/allow-imports-only-from-main-package-entry-point
+import ImageBlock from '@ckeditor/ckeditor5-image/src/imageblock';
 
 // Stock3 Custom Plugins
 import InsertImage from './plugins/insertImage/InsertImage';
@@ -17,7 +20,7 @@ import MentionCustomization from './plugins/mentionCustomization/MentionCustomiz
 import Stock3Colors from './plugins/stock3colors/Stock3Colors';
 import Stock3Video from './plugins/stock3video/Stock3Video';
 
-export default class Stock3Editor extends ClassicEditor {
+export default class Stock3CKEditorChartingPlugin extends ClassicEditor {
 	// Plugins to include in the build.
 	public static builtinPlugins = [
 		Essentials,
@@ -55,7 +58,6 @@ export default class Stock3Editor extends ClassicEditor {
 }
 
 export {
-	type default as Stock3CKEditorChartingPlugin,
 	type Stock3CKEditorChartingAdapter,
 	type Stock3CKEditorChart
 } from './plugins/charting/Charting';
