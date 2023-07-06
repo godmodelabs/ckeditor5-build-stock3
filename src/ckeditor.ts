@@ -20,7 +20,7 @@ import MentionCustomization from './plugins/mentionCustomization/MentionCustomiz
 import Stock3Colors from './plugins/stock3colors/Stock3Colors';
 import Stock3Video from './plugins/stock3video/Stock3Video';
 
-export default class Stock3CKEditorChartingPlugin extends ClassicEditor {
+export default class Stock3CKEditor extends ClassicEditor {
 	// Plugins to include in the build.
 	public static builtinPlugins = [
 		Essentials,
@@ -58,6 +58,7 @@ export default class Stock3CKEditorChartingPlugin extends ClassicEditor {
 }
 
 export {
+	default as Stock3CKEditorChartingPlugin,
 	type Stock3CKEditorChartingAdapter,
 	type Stock3CKEditorChart
 } from './plugins/charting/Charting';
