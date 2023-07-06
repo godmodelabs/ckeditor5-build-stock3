@@ -9,7 +9,7 @@ const STOCK3STYLE = 'stock3Style';
 export default class Stock3ColorsUI extends Plugin {
 	public init(): void {
 		const editor = this.editor;
-		const colorsHelper = new Stock3ColorsList( ( editor.config.get( 'stock3colors.enabledStyles' ) ?? [] ) as Array<string> );
+		const colorsHelper = new Stock3ColorsList( ( editor.config.get( 'stock3colors.enabledStyles' ) ) as Array<string> | undefined );
 		const availableStyles = colorsHelper.getAvailable();
 		const uiListClassName = editor.config.get( 'stock3colors.uiListClassName' ) || '';
 		const titleByClasses = colorsHelper.getTitleByClasses();
