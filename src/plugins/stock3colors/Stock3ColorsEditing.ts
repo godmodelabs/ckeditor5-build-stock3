@@ -24,7 +24,8 @@ export default class Stock3ColorsEditing extends Plugin {
 			}
 		} );
 
-		const availableStyles = new Stock3ColorsList( editor.config.get( 'stock3colors.enabledStyles' ) as string[] | undefined ).getAvailable();
+		const enabledStyles = editor.config.get( 'stock3colors.enabledStyles' ) as Array<string> | undefined;
+		const availableStyles = new Stock3ColorsList( enabledStyles ).getAvailable();
 
 		const regex = new RegExp( availableStyles.map( _ => _.classes ).join( '|' ) );
 

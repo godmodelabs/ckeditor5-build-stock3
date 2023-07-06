@@ -32,8 +32,11 @@ export default class Emojis extends Plugin {
 
 			addToolbarToDropdown( view, buttons );
 
-			view.toolbarView?.set( {
-				maxWidth: '395px'
+			view.once( 'change:isOpen', () => {
+				// Toolbar view is only created once the dropdown is opened for the first time (i.e. lazily)
+				view.toolbarView!.set( {
+					maxWidth: '395px'
+				} );
 			} );
 
 			return view;

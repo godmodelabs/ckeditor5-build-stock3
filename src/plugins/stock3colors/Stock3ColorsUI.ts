@@ -23,7 +23,7 @@ export default class Stock3ColorsUI extends Plugin {
 				return dropdownView;
 			}
 
-			const createClickFunction: ( classes: string ) => GetCallback<BaseEvent> = classes => {
+			const createClickFunction: ( classes?: string ) => GetCallback<BaseEvent> = classes => {
 				return () => {
 					editor.execute( STOCK3STYLE, classes ? { value: classes } : undefined );
 					editor.editing.view.focus();
@@ -46,8 +46,11 @@ export default class Stock3ColorsUI extends Plugin {
 
 			addToolbarToDropdown( dropdownView, itemDefinitions );
 
-			dropdownView.toolbarView?.set( {
-				class: `stock3 stock3-style-toolbar ${ uiListClassName }`
+			dropdownView.once( 'change:isOpen', () => {
+				// Toolbar view is only created once the dropdown is opened for the first time (i.e. lazily)
+				dropdownView.toolbarView!.set( {
+					class: `stock3 stock3-style-toolbar ${ uiListClassName }`
+				} );
 			} );
 			dropdownView.buttonView.set( {
 				isOn: false,
@@ -56,7 +59,7 @@ export default class Stock3ColorsUI extends Plugin {
 			} );
 
 			dropdownView.bind( 'isEnabled' ).to( command, 'isEnabled', _ => _ && !!availableStyles.length );
-			dropdownView.buttonView.bind( 'label' ).to( command, 'value', _ => typeof _ === 'string' ? titleByClasses[ _ ] : 'Standard' );
+			dropdownView.buttonView.bind( 'label' ).to( command, 'value', _ => _ ? titleByClasses[ String( _ ) ] : 'Standard' );
 
 			return dropdownView;
 		} );
