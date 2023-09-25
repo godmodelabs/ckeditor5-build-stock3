@@ -18,11 +18,19 @@ export default class MentionCustomization extends Plugin {
 			model: {
 				key: 'mention',
 				value: ( viewItem: Element ) => {
-					return editor.plugins.get( 'Mention' ).toMentionAttribute( viewItem, {
-						// @ts-expect-error This works, it's an issue w/ CKEditor's types. It's exactly the code they
-						// use in the doc example.
+					const articleCommentId = viewItem.getAttribute( 'data-article-comment-id' );
+
+					const mentionAttribute: Record<string, string> = {
 						userId: String( viewItem.getAttribute( 'data-user-id' ) )
-					} );
+					};
+
+					if ( articleCommentId ) {
+						mentionAttribute.articleCommentId = String( articleCommentId );
+					}
+
+					// @ts-expect-error This works, it's an issue w/ CKEditor's types. It's exactly the code they
+					// use in the doc example.
+					return editor.plugins.get( 'Mention' ).toMentionAttribute( viewItem, mentionAttribute );
 				}
 			},
 			converterPriority: 'high'
@@ -37,9 +45,14 @@ export default class MentionCustomization extends Plugin {
 					return;
 				}
 
-				return writer.createAttributeElement( 'span', {
+				const elementData: Record<string, string | number> = {
 					'data-user-id': modelAttributeValue.userId
-				}, {
+				};
+				if ( modelAttributeValue.articleCommentId ) {
+					elementData[ 'data-article-comment-id' ] = modelAttributeValue.articleCommentId;
+				}
+
+				return writer.createAttributeElement( 'span', elementData, {
 					// Make mention attribute to be wrapped by other attribute elements.
 					priority: 20,
 					// Prevent merging mentions together.
